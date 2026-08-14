@@ -3,10 +3,13 @@
  * Zero-chroma grayscale only: every state is communicated via value/opacity/
  * weight, never hue (destructive is white/black, not red). See DESIGN.md.
  *
- * Fonts are NOT loaded here. The consuming app is expected to load
- * Archivo / IBM Plex Sans / IBM Plex Mono itself (e.g. via next/font/google
- * exposing --font-archivo / --font-plex-sans / --font-plex-mono) and the
- * tailwind preset falls back to the bare font names otherwise.
+ * Fonts are NOT loaded here. The consuming app must load Archivo / IBM Plex
+ * Sans / IBM Plex Mono itself and define --font-archivo, --font-plex-sans
+ * and --font-plex-mono. This is not optional: the preset writes
+ * `font-family: var(--font-archivo), Archivo, sans-serif`, and an undefined
+ * custom property makes the whole declaration invalid at computed-value
+ * time. The bare name after the comma never gets its turn. DESIGN.md has
+ * the recipe for next/font/google and for plain CSS.
  */
 
 @layer base {

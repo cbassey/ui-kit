@@ -50,11 +50,13 @@ Use `file:../ui-kit` instead only while you develop both repos at once.
    @import '@cbassey/ui-kit/styles.css';
    ```
 
-4. Fonts: load Archivo / IBM Plex Sans / IBM Plex Mono yourself and expose
-   them as `--font-archivo`, `--font-plex-sans`, `--font-plex-mono`. The
-   preset falls back to the bare family names, which only works if the
-   fonts are installed locally — so load them. DESIGN.md has the exact
-   snippet for `next/font/google` and for a plain CSS `@import`.
+4. Fonts: load Archivo / IBM Plex Sans / IBM Plex Mono yourself and define
+   `--font-archivo`, `--font-plex-sans`, `--font-plex-mono`. This step is
+   required. The preset writes `var(--font-archivo), Archivo, sans-serif`,
+   and an undefined custom property voids the entire declaration, so the
+   bare name after the comma is not a working fallback — the app silently
+   renders in the inherited stack. DESIGN.md has the exact snippet for
+   `next/font/google` and for a plain CSS `@import`.
 
 5. Brand mark, if the app is a Brightside product:
 
