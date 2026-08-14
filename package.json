@@ -26,6 +26,7 @@
   ],
   "scripts": {
     "build": "tsup && cp src/styles/tokens.css dist/styles.css && cp src/styles/tokens.css styles.css && tsc -p tsconfig.preset.json && mv tailwind.preset.js tailwind.preset.cjs && mv tailwind.preset.d.ts tailwind.preset.d.cts",
+    "prepare": "npm run build",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
