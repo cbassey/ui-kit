@@ -13,7 +13,7 @@ function Track({ passed, total, tone }: { passed: number; total: number; tone: s
           style={{ width: `${rate * 100}%` }}
         />
       </div>
-      <span className="w-9 shrink-0 text-right font-mono text-[11px] tabular text-muted-foreground">
+      <span className="w-9 shrink-0 text-right text-[11px] tabular text-muted-foreground">
         {passed}/{total}
       </span>
     </div>
@@ -21,7 +21,7 @@ function Track({ passed, total, tone }: { passed: number; total: number; tone: s
 }
 
 function Dash() {
-  return <span className="font-mono text-[11px] text-muted-foreground/40">—</span>
+  return <span className="text-[11px] text-muted-foreground/40">—</span>
 }
 
 export function CategoryBreakdown({

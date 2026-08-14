@@ -18,9 +18,10 @@ value or an opacity step before reaching for color.
 
 - **Archivo** (`font-display`, weights 500–800) — page titles, big numeric
   displays (gauges, hero stats), card headings. Never body text.
-- **IBM Plex Sans** (`font-sans`, the default) — all prose and UI copy.
-- **IBM Plex Mono** (`font-mono`) — anything numeric or tabular, eyebrow
-  labels (`uppercase tracking-[0.16em] text-[11px]`), badges, code.
+- **IBM Plex Sans** (`font-sans`, the default) — all prose, UI copy, badges,
+  section labels, and tabular numbers (pair with `.tabular`).
+- **IBM Plex Mono** (`font-mono`) — code and literal technical strings only.
+  Do not use mono for labels, badges, scores, or section titles.
 
 Font sizes frequently use arbitrary bracket values (`text-[11px]`,
 `text-[13px]`, `text-[15px]`) rather than Tailwind's default scale — this is
@@ -39,9 +40,18 @@ Cards and panels are `rounded-xl`/`rounded-2xl` with `border border-border`
 and `bg-card`. Shadows are avoided or kept to `shadow-none`/minimal — this is
 a flat, print-like surface language, not a soft-UI one.
 
+## Page column
+
+App chrome uses a single centered column: `--page-max-width` (72rem, same
+as plop's `max-w-6xl`) with `1.25rem` inline padding (`2rem` from `sm`).
+`<Shell>` applies the `.page-shell` utility to the header inner and the
+main. Don't invent a narrower `max-w-3xl` column in consuming apps — if a
+view needs to be narrower (a login card), constrain that component, not the
+page.
+
 ## The `PageHeader` pattern
 
-Every view's top-of-page pattern: optional uppercase-tracked eyebrow label →
+Every view's top-of-page pattern: optional muted eyebrow label →
 `font-display` title → optional description → optional right-aligned action
 slot. Reuse `<PageHeader>` rather than hand-rolling this per view.
 

@@ -13,14 +13,14 @@ function Gauge({ stat, tone }: { stat: GaugeStat; tone: 'muted' | 'strong' }) {
       <div className="mb-2 flex items-baseline justify-between text-[12px] text-muted-foreground">
         <span>{stat.label}</span>
         {stat.detail && (
-          <span className="tabular font-mono text-[11px]">{stat.detail}</span>
+          <span className="tabular text-[11px]">{stat.detail}</span>
         )}
       </div>
       <div className="flex items-end gap-2">
         <span className="font-display text-6xl font-extrabold leading-none tabular text-foreground">
           {pct(stat.rate)}
         </span>
-        <span className="mb-1 font-mono text-sm text-muted-foreground">%</span>
+        <span className="mb-1 text-sm text-muted-foreground">%</span>
       </div>
       <div className="relative mt-3 h-1.5 overflow-hidden rounded-sm bg-muted">
         <div
@@ -73,7 +73,7 @@ export function Meter({
               {title}
             </h2>
             {eyebrow && (
-              <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="mt-1 text-xs text-muted-foreground">
                 {eyebrow}
               </p>
             )}

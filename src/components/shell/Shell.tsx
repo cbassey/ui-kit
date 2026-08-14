@@ -14,17 +14,17 @@ export function Shell({
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-20 border-b border-border/80 bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-6xl items-center gap-8 px-5 sm:px-8">
-          <span className="font-display text-[15px] font-semibold tracking-tight">
+        <div className="page-shell flex h-14 items-center gap-3 sm:gap-8">
+          <span className="shrink-0 font-display text-[15px] font-semibold tracking-tight">
             {brand}
           </span>
-          <nav className="flex flex-1 items-center gap-1">{nav}</nav>
-          {action}
+          <nav className="-mx-1 flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto px-1 [scrollbar-width:none] sm:gap-1 [&::-webkit-scrollbar]:hidden">
+            {nav}
+          </nav>
+          {action ? <div className="shrink-0">{action}</div> : null}
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-12">
-        {children}
-      </main>
+      <main className="page-shell py-6 sm:py-12">{children}</main>
     </div>
   )
 }

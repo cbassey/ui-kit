@@ -7,18 +7,25 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
-    "./tailwind.preset": "./tailwind.preset.cjs",
+    "./tailwind.preset": {
+      "types": "./tailwind.preset.d.cts",
+      "require": "./tailwind.preset.cjs",
+      "default": "./tailwind.preset.cjs"
+    },
     "./styles.css": "./dist/styles.css"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "tailwind.preset.cjs",
     "tailwind.preset.d.cts"
   ],
   "scripts": {
-    "build": "tsup && cp src/styles/tokens.css dist/styles.css && tsc -p tsconfig.preset.json && mv tailwind.preset.js tailwind.preset.cjs && mv tailwind.preset.d.ts tailwind.preset.d.cts",
+    "build": "tsup && cp src/styles/tokens.css dist/styles.css && cp src/styles/tokens.css styles.css && tsc -p tsconfig.preset.json && mv tailwind.preset.js tailwind.preset.cjs && mv tailwind.preset.d.ts tailwind.preset.d.cts",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
