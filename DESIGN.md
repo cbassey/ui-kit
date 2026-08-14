@@ -43,17 +43,36 @@ a flat, print-like surface language, not a soft-UI one.
 ## Page column
 
 App chrome uses a single centered column: `--page-max-width` (72rem, same
-as plop's `max-w-6xl`) with `1.25rem` inline padding (`2rem` from `sm`).
+as plop's `max-w-6xl`) with `1rem` inline padding (`2rem` from `sm`).
 `<Shell>` applies the `.page-shell` utility to the header inner and the
-main. Don't invent a narrower `max-w-3xl` column in consuming apps — if a
-view needs to be narrower (a login card), constrain that component, not the
-page.
+main. Keep the shell wide enough for chrome and multi-column layouts
+(e.g. content + sticky action rail). Don't invent a narrower `max-w-3xl`
+page column in consuming apps — if reading measure needs to be narrower
+(JD copy, a login card), constrain that text block with `max-w-xl` /
+`max-w-2xl`, not the page shell.
 
 ## The `PageHeader` pattern
 
 Every view's top-of-page pattern: optional muted eyebrow label →
 `font-display` title → optional description → optional right-aligned action
 slot. Reuse `<PageHeader>` rather than hand-rolling this per view.
+
+## Async feedback
+
+- **Toasts** — success and error for server actions / async work. Mount
+  `<Toaster />` once at the app root and call `toast` from `sonner`.
+  Stay grayscale: no green success or red error fills. Errors get a
+  slightly stronger border/background; successes stay quiet.
+- **Busy buttons** — use `<BusyButton>` (or the same pattern): swap the
+  label (`Writing`, `Screening`), keep full opacity, show the
+  `animate-sweep` bar. Do not dim the control and append `…`.
+
+## Button `asChild`
+
+`Button asChild` requires a **single React element child** (typically a
+link). Whitespace or multiple children break Radix `Slot`. Prefer
+`<Button asChild><Link …></Link></Button>`, not a fragment or mixed
+text nodes.
 
 ## Motion vocabulary
 
@@ -62,7 +81,7 @@ Three keyframes only, all respecting `prefers-reduced-motion`:
 - `animate-rise` — opacity 0→1 + translateY(8px→0), for content settling in
   (list rows, pane switches).
 - `animate-fill` — scaleX(0→1), for progress/meter bars filling.
-- `animate-sweep` — a loading shimmer sweep.
+- `animate-sweep` — a loading shimmer sweep (busy buttons, light progress).
 
 Don't add new keyframes without a strong reason; this vocabulary is meant to
 stay small.
