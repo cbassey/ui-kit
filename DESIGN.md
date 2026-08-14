@@ -23,6 +23,43 @@ value or an opacity step before reaching for color.
 - **IBM Plex Mono** (`font-mono`) — code and literal technical strings only.
   Do not use mono for labels, badges, scores, or section titles.
 
+The preset maps these to CSS variables, so every app must load the three
+families and expose them under the same variable names. There is no fallback
+that looks right — an app that skips this renders in the system stack.
+
+Next.js (hub, weld/web) — in the root layout:
+
+```tsx
+import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+
+const archivo = Archivo({ variable: '--font-archivo', subsets: ['latin'] })
+const plexSans = IBM_Plex_Sans({
+  variable: '--font-plex-sans',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
+const plexMono = IBM_Plex_Mono({
+  variable: '--font-plex-mono',
+  subsets: ['latin'],
+  weight: ['400', '500'],
+})
+
+// <html className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}>
+```
+
+Vite or plain CSS (plop/ui) — at the top of the global stylesheet, before the
+Tailwind directives:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --font-archivo: 'Archivo';
+  --font-plex-sans: 'IBM Plex Sans';
+  --font-plex-mono: 'IBM Plex Mono';
+}
+```
+
 Font sizes frequently use arbitrary bracket values (`text-[11px]`,
 `text-[13px]`, `text-[15px]`) rather than Tailwind's default scale — this is
 deliberate fine-grained control, not an oversight. Stick to the 11/12/13/14/
@@ -85,6 +122,36 @@ Three keyframes only, all respecting `prefers-reduced-motion`:
 
 Don't add new keyframes without a strong reason; this vocabulary is meant to
 stay small.
+
+## Brand marks
+
+Marks come from `@cbassey/ui-kit/brand`, a separate entry point with no
+`"use client"` banner. They are static SVG, so they render in a server
+component and ship no JavaScript. Import them from `/brand`, not from the
+package root.
+
+```tsx
+import { BrandTile, BrandLockup, WeldMark, getBrandMark } from '@cbassey/ui-kit/brand'
+
+<BrandLockup mark={WeldMark} name="Weld" />        // header, breadcrumb root
+<BrandTile mark={getBrandMark(slug)} size="lg" />  // product avatar
+```
+
+A mark is not an icon. Icons label an action and come from `lucide-react`; a
+mark identifies a product and never changes meaning with context. Rules for
+drawing a new one:
+
+- **Draw the noun in the name.** A drop for Plop, a seam for Weld. No abstract
+  swoosh, no letter in a box — a letter tile is the default every generated
+  interface reaches for, and it says nothing about the product.
+- **`currentColor` only**, on the same 24x24 grid as the rest. A mark that
+  needs a colour is the wrong mark, because the palette has no hue.
+- **Check it at 18px first.** That is where marks live, in a header or a
+  breadcrumb. Thin gaps close up at small sizes, and a mark that fuses into a
+  blob has failed even if it looks right at 56px.
+
+Sizes are fixed by `BrandTile`: 40px in a list, 56px at the top of a landing
+page, inverted plate (`bg-foreground text-background`) in both cases.
 
 ## Icons
 

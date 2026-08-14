@@ -3,16 +3,27 @@
 Shared "Rams B&W" design system — extracted from `plop/ui`. See
 [DESIGN.md](./DESIGN.md) for the design discipline this library encodes.
 
-Local-only package for now (no npm publish). Consume it from a sibling repo
-via a `file:` dependency:
+Not published to npm. Consume it from GitHub, which is what `hub`, `weld/web`
+and `plop/ui` do. The `prepare` script builds `dist/` at install time:
 
 ```json
 {
   "dependencies": {
-    "@cbassey/ui-kit": "file:../ui-kit"
+    "@cbassey/ui-kit": "github:cbassey/ui-kit"
   }
 }
 ```
+
+Use `file:../ui-kit` instead only while you develop both repos at once.
+
+## Entry points
+
+| Import | Contents | Notes |
+| --- | --- | --- |
+| `@cbassey/ui-kit` | shadcn primitives, app chrome, data display, `cn` | Client. The bundle carries a `"use client"` banner, so a server component can render these but cannot call `cn` itself. |
+| `@cbassey/ui-kit/brand` | `BrightsideMark`, `PlopMark`, `WeldMark`, `BrandTile`, `BrandLockup` | Static SVG, no banner. Renders in a server component and ships no JavaScript. |
+| `@cbassey/ui-kit/tailwind.preset` | tokens, fonts, keyframes | |
+| `@cbassey/ui-kit/styles.css` | CSS custom properties | |
 
 ## Setup in a consuming app
 
@@ -39,10 +50,22 @@ via a `file:` dependency:
    @import '@cbassey/ui-kit/styles.css';
    ```
 
-4. Fonts: load Archivo / IBM Plex Sans / IBM Plex Mono yourself (e.g. via
-   `next/font/google`) and expose them as `--font-archivo`,
-   `--font-plex-sans`, `--font-plex-mono` CSS variables — the preset's
-   `fontFamily` falls back to the bare Google Fonts names if you don't.
+4. Fonts: load Archivo / IBM Plex Sans / IBM Plex Mono yourself and expose
+   them as `--font-archivo`, `--font-plex-sans`, `--font-plex-mono`. The
+   preset falls back to the bare family names, which only works if the
+   fonts are installed locally — so load them. DESIGN.md has the exact
+   snippet for `next/font/google` and for a plain CSS `@import`.
+
+5. Brand mark, if the app is a Brightside product:
+
+   ```tsx
+   import { BrandLockup, WeldMark } from '@cbassey/ui-kit/brand'
+
+   <BrandLockup mark={WeldMark} name="Weld" />
+   ```
+
+   Add new marks to `src/brand/marks.tsx` here, not in the consuming app,
+   so every surface picks up the same drawing.
 
 ## Development
 
