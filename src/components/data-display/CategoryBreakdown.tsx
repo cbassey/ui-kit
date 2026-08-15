@@ -54,7 +54,7 @@ export function CategoryBreakdown({
         {rows.map((row) => (
           <div
             key={row.label}
-            className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 px-5 py-3.5 sm:grid-cols-[180px_1fr_1fr]"
+            className="grid grid-cols-2 gap-x-6 gap-y-2 px-5 py-3.5 sm:grid-cols-[180px_1fr_1fr]"
           >
             <div className="col-span-2 self-center font-sans text-sm text-foreground sm:col-span-1">
               {row.label}

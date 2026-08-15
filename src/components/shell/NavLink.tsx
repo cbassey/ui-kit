@@ -14,10 +14,10 @@ export function NavLink({
   return (
     <Button
       type="button"
-      variant={active ? 'default' : 'ghost'}
+      variant={active ? 'secondary' : 'ghost'}
       size="sm"
       onClick={onClick}
-      className={cn(!active && 'text-muted-foreground')}
+      className={cn('shrink-0', !active && 'text-muted-foreground')}
     >
       {children}
     </Button>
