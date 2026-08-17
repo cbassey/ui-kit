@@ -91,6 +91,34 @@ export function WeldMark({ className }: BrandMarkProps) {
   )
 }
 
+/**
+ * Apollo — a bow, drawn, arrow on the string. The god of archery reads
+ * as aim: the interview draws back, then looses one honest score. Arc
+ * and shaft stay full-bleed on the grid so the mark holds its size
+ * against the rest of the family at 18px.
+ */
+export function ApolloMark({ className }: BrandMarkProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden
+      className={classes('shrink-0', className)}
+      fill="none"
+    >
+      <path d="M7 3C3 7 3 17 7 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M7 3 13 12 7 21"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M13 12h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M22 12 17 9.3v5.4Z" fill="currentColor" />
+    </svg>
+  )
+}
+
 /** Fallback for a product with no mark yet: an empty plate, not a letter. */
 export function PlaceholderMark({ className }: BrandMarkProps) {
   return (
@@ -118,6 +146,7 @@ export const brandMarks: Record<string, BrandMarkComponent> = {
   brightside: BrightsideMark,
   plop: PlopMark,
   weld: WeldMark,
+  apollo: ApolloMark,
 }
 
 export function getBrandMark(slug: string): BrandMarkComponent {
