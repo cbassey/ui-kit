@@ -92,10 +92,13 @@ export function WeldMark({ className }: BrandMarkProps) {
 }
 
 /**
- * Apollo — a bow, drawn, arrow on the string. The god of archery reads
- * as aim: the interview draws back, then looses one honest score. Arc
- * and shaft stay full-bleed on the grid so the mark holds its size
- * against the rest of the family at 18px.
+ * Apollo — a target, three rings deep, with the hit pulled off-centre.
+ * A perfectly concentric bullseye is stock iconography — every dashboard
+ * has one meaning "goals." The ring and the hit share a centre with each
+ * other but not with the frame, on purpose: an honest audit lands close,
+ * not dead centre, the same way this product refuses to hand back a
+ * flattering generic score. That one offset is the mark's whole twist,
+ * the same job Brightside's lit half and Plop's ripple do for theirs.
  */
 export function ApolloMark({ className }: BrandMarkProps) {
   return (
@@ -105,16 +108,9 @@ export function ApolloMark({ className }: BrandMarkProps) {
       className={classes('shrink-0', className)}
       fill="none"
     >
-      <path d="M7 3C3 7 3 17 7 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path
-        d="M7 3 13 12 7 21"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M13 12h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M22 12 17 9.3v5.4Z" fill="currentColor" />
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="13.3" cy="11" r="4.75" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="13.3" cy="11" r="2" fill="currentColor" />
     </svg>
   )
 }
