@@ -57,10 +57,6 @@ const preset: Omit<Config, 'content'> = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
-        sweep: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(400%)' },
-        },
         rise: {
           '0%': { opacity: '0', transform: 'translateY(8px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -70,7 +66,6 @@ const preset: Omit<Config, 'content'> = {
         },
       },
       animation: {
-        sweep: 'sweep 2.4s ease-in-out infinite',
         rise: 'rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
         fill: 'fill 0.9s cubic-bezier(0.16, 1, 0.3, 1) both',
       },
