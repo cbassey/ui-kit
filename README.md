@@ -22,6 +22,7 @@ Use `file:../ui-kit` instead only while you develop both repos at once.
 | --- | --- | --- |
 | `@cbassey/ui-kit` | shadcn primitives, app chrome, data display, `cn` | Client. The bundle carries a `"use client"` banner, so a server component can render these but cannot call `cn` itself. |
 | `@cbassey/ui-kit/brand` | `BrightsideMark`, `PlopMark`, `WeldMark`, `BrandTile`, `BrandLockup` | Static SVG, no banner. Renders in a server component and ships no JavaScript. |
+| `@cbassey/ui-kit/theme-script` | `themeInitScript()`, `THEME_STORAGE_KEY` | No banner. The anti-flash `<head>` snippet — safe to import into a Next.js server layout. |
 | `@cbassey/ui-kit/tailwind.preset` | tokens, fonts, keyframes | |
 | `@cbassey/ui-kit/styles.css` | CSS custom properties | |
 
@@ -68,6 +69,23 @@ Use `file:../ui-kit` instead only while you develop both repos at once.
 
    Add new marks to `src/brand/marks.tsx` here, not in the consuming app,
    so every surface picks up the same drawing.
+
+6. Theme. Do **not** hardcode a `dark` class on `<html>`. With no class the
+   tokens follow `prefers-color-scheme` on their own — light by default,
+   dark when the OS asks. That is the whole setup for most apps.
+
+   Only if an app needs a manual Light / Dark / System control, add
+   `<ThemeProvider>` + `<ThemeToggle />` and inline the anti-flash script:
+
+   ```tsx
+   import { ThemeProvider, ThemeToggle } from '@cbassey/ui-kit'
+   import { themeInitScript } from '@cbassey/ui-kit/theme-script'
+
+   // <head>:
+   <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
+   ```
+
+   See DESIGN.md → "Light and dark".
 
 ## Development
 

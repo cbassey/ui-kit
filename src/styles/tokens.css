@@ -1,7 +1,19 @@
 /*
- * @cbassey/ui-kit design tokens — "Rams B&W" system.
- * Zero-chroma grayscale only: every state is communicated via value/opacity/
- * weight, never hue (destructive is white/black, not red). See DESIGN.md.
+ * @cbassey/ui-kit design tokens — "Rams B&W" system, now dual-theme.
+ *
+ * State is still communicated through value, opacity, and weight, never hue
+ * (destructive is ink-on-paper, not red). Ink, borders, and rings are pure
+ * zero-chroma grayscale in both themes. The only concession to warmth is the
+ * light ground: a faint paper tone (hue 40, low saturation) instead of a
+ * clinical white. See DESIGN.md.
+ *
+ * Theme resolution:
+ *   :root                        -> light (the default)
+ *   :root.dark                   -> dark  (explicit choice)
+ *   @media (prefers-color-scheme: dark), no explicit class -> dark
+ * `<ThemeProvider>` from the package root sets/removes the class; drop
+ * `themeInitScript()` from `@cbassey/ui-kit/theme-script` in <head> to apply
+ * the stored choice before first paint.
  *
  * Fonts are NOT loaded here. The consuming app must load Archivo / IBM Plex
  * Sans / IBM Plex Mono itself and define --font-archivo, --font-plex-sans
@@ -13,7 +25,38 @@
  */
 
 @layer base {
+  /* ---- Light: warm paper ground, neutral ink ------------------------- */
   :root {
+    --background: 40 20% 97%;
+    --foreground: 0 0% 9%;
+    --card: 40 24% 99%;
+    --card-foreground: 0 0% 9%;
+    --popover: 40 24% 99%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 40 20% 98%;
+    --secondary: 40 12% 92%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 12% 93%;
+    --muted-foreground: 0 0% 38%;
+    --accent: 40 14% 90%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 0% 9%;
+    --destructive-foreground: 40 20% 98%;
+    --border: 0 0% 87%;
+    --input: 0 0% 87%;
+    --ring: 0 0% 9%;
+    --signal: 0 0% 9%;
+    --warn: 0 0% 38%;
+
+    /* Theme-independent. */
+    --radius: 0.625rem;
+    --page-max-width: 72rem; /* matches plop's max-w-6xl page column */
+    color-scheme: light;
+  }
+
+  /* ---- Dark: near-black ground, white ink -------------------------------- */
+  :root.dark {
     --background: 0 0% 2%;
     --foreground: 0 0% 100%;
     --card: 0 0% 5%;
@@ -35,8 +78,36 @@
     --ring: 0 0% 100%;
     --signal: 0 0% 100%;
     --warn: 0 0% 58%;
-    --radius: 0.625rem;
-    --page-max-width: 72rem; /* matches plop's max-w-6xl page column */
+    color-scheme: dark;
+  }
+
+  /* No explicit choice yet: follow the OS. The class rules above still win
+     because their selector is more specific. */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light):not(.dark) {
+      --background: 0 0% 2%;
+      --foreground: 0 0% 100%;
+      --card: 0 0% 5%;
+      --card-foreground: 0 0% 100%;
+      --popover: 0 0% 5%;
+      --popover-foreground: 0 0% 100%;
+      --primary: 0 0% 100%;
+      --primary-foreground: 0 0% 2%;
+      --secondary: 0 0% 10%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 0 0% 12%;
+      --muted-foreground: 0 0% 58%;
+      --accent: 0 0% 9%;
+      --accent-foreground: 0 0% 100%;
+      --destructive: 0 0% 100%;
+      --destructive-foreground: 0 0% 2%;
+      --border: 0 0% 16%;
+      --input: 0 0% 16%;
+      --ring: 0 0% 100%;
+      --signal: 0 0% 100%;
+      --warn: 0 0% 58%;
+      color-scheme: dark;
+    }
   }
 
   * {
@@ -49,7 +120,7 @@
   }
 
   ::selection {
-    background: hsl(0 0% 100% / 0.18);
+    background: hsl(var(--foreground) / 0.16);
   }
 
   button:focus-visible,

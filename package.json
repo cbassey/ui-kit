@@ -1,6 +1,6 @@
 {
   "name": "@cbassey/ui-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "license": "UNLICENSED",
@@ -14,6 +14,11 @@
       "types": "./dist/brand.d.ts",
       "import": "./dist/brand.js",
       "default": "./dist/brand.js"
+    },
+    "./theme-script": {
+      "types": "./dist/theme-script.d.ts",
+      "import": "./dist/theme-script.js",
+      "default": "./dist/theme-script.js"
     },
     "./tailwind.preset": {
       "types": "./tailwind.preset.d.cts",

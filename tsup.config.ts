@@ -24,4 +24,11 @@ export default defineConfig([
     // a server component and ship no JavaScript. Adding "use client" here
     // would pull them into the client bundle for nothing.
   },
+  {
+    ...shared,
+    entry: { "theme-script": "src/theme-script/index.ts" },
+    // No banner. `themeInitScript` is a plain string builder a Next.js
+    // server layout inlines in <head>; a "use client" banner would make it
+    // uncallable from a server component.
+  },
 ]);
