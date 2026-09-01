@@ -116,13 +116,13 @@ export function ApolloMark({ className }: BrandMarkProps) {
 }
 
 /**
- * Gael — a tuning fork with one tine short. Gael's job is calibration:
+ * Gael — a tuning fork with one prong short. Gael's job is calibration:
  * you speak, and it tunes your delivery toward a reference. A tuning fork
- * is the literal object for "sound you check yourself against." The tines
- * are deliberately unequal — you are tuning toward the note, not already
- * on it — which is Gael's twist, the same move as Apollo's off-centre
- * hit. Two tines, not four, and a long stem, so it does not read as
- * cutlery at 18px.
+ * is the literal object for "sound you check yourself against." The
+ * prongs are deliberately unequal — you are tuning toward the note, not
+ * already on it — which is Gael's twist, the same move as Apollo's
+ * off-centre hit. The U-bend opens wide and the stem drops from its base
+ * so the whole thing reads as a fork, not an "h", at 18px.
  */
 export function GaelMark({ className }: BrandMarkProps) {
   return (
@@ -133,13 +133,13 @@ export function GaelMark({ className }: BrandMarkProps) {
       fill="none"
     >
       <path
-        d="M8 3v10a4 4 0 0 1 8 0V7"
+        d="M8 3.5V11.5a4 4 0 0 0 8 0V6"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
-        d="M12 17v4"
+        d="M12 15.5V21"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
