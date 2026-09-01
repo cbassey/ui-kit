@@ -115,6 +115,39 @@ export function ApolloMark({ className }: BrandMarkProps) {
   )
 }
 
+/**
+ * Gael — a tuning fork with one tine short. Gael's job is calibration:
+ * you speak, and it tunes your delivery toward a reference. A tuning fork
+ * is the literal object for "sound you check yourself against." The tines
+ * are deliberately unequal — you are tuning toward the note, not already
+ * on it — which is Gael's twist, the same move as Apollo's off-centre
+ * hit. Two tines, not four, and a long stem, so it does not read as
+ * cutlery at 18px.
+ */
+export function GaelMark({ className }: BrandMarkProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden
+      className={classes('shrink-0', className)}
+      fill="none"
+    >
+      <path
+        d="M8 3v10a4 4 0 0 1 8 0V7"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M12 17v4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 /** Fallback for a product with no mark yet: an empty plate, not a letter. */
 export function PlaceholderMark({ className }: BrandMarkProps) {
   return (
@@ -143,6 +176,7 @@ export const brandMarks: Record<string, BrandMarkComponent> = {
   plop: PlopMark,
   weld: WeldMark,
   apollo: ApolloMark,
+  gael: GaelMark,
 }
 
 export function getBrandMark(slug: string): BrandMarkComponent {
