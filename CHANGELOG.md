@@ -5,6 +5,32 @@ All notable changes to this project are documented here, following
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-09-01
+
+### Added
+- **Light and dark themes.** `styles.css` now defines the light palette on
+  `:root`, the dark palette on `:root.dark`, and a
+  `prefers-color-scheme: dark` fallback for visitors with no stored choice.
+  Light mode keeps the zero-chroma discipline for ink and borders; only the
+  ground carries a faint warm paper tone.
+- `<ThemeProvider>` + `useTheme()` — framework-agnostic theme state
+  (`light` / `dark` / `system`), persisted to `localStorage`, applied as a
+  class on `<html>`. Defaults: `defaultTheme="system"`,
+  `systemFallback="dark"`.
+- `<ThemeToggle>` — grayscale icon button with a three-way Light / Dark /
+  System menu, sized for header chrome.
+- `@cbassey/ui-kit/theme-script` — a new bannerless entry exporting
+  `themeInitScript()`, the anti-flash `<head>` snippet, plus
+  `THEME_STORAGE_KEY`.
+
+### Changed
+- DESIGN.md: "Zero-chroma grayscale" reworded for the warm light ground; new
+  "Light and dark" section with the wiring recipe. Consuming apps must stop
+  hardcoding a `dark` class on `<html>` and build every surface from the
+  semantic tokens.
+
+## [0.2.0]
+
 ### Added
 - `<Toaster />` — Rams-styled Sonner host for async success/error toasts.
 - `<BusyButton />` — label swap + `animate-sweep` bar for in-flight actions.

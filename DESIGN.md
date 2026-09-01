@@ -7,12 +7,65 @@ style preference.
 
 ## Zero-chroma grayscale
 
-Every color in the system is pure grayscale (HSL with 0% saturation). State —
-pass/fail, active/inactive, selected/unselected, even destructive actions —
-is communicated through **value, opacity, and weight**, never hue. There is
-no red for "destructive"; it's still white-on-black, just as loud as
+State — pass/fail, active/inactive, selected/unselected, even destructive
+actions — is communicated through **value, opacity, and weight**, never hue.
+There is no red for "destructive"; it's still ink-on-paper, just as loud as
 "primary." If a component needs a new visual state, reach for a grayscale
 value or an opacity step before reaching for color.
+
+Ink, borders, rings, and every foreground token are pure grayscale (HSL with
+0% saturation) in both themes. The single concession to warmth is the light
+**ground**: `--background` / `--card` / `--popover` carry a faint paper tone
+(hue 40, ~12–24% saturation, 97–99% lightness) so a light surface reads as
+paper, not a clinical white. Nothing painted *on* the ground picks up that
+hue. Dark mode stays fully zero-chroma.
+
+## Light and dark
+
+The token set is dual-theme. `styles.css` defines:
+
+- `:root` — the **light** palette (the default).
+- `:root.dark` — the **dark** palette (an explicit choice).
+- an `@media (prefers-color-scheme: dark)` block that applies the dark
+  palette when no `light` / `dark` class is set, so a visitor with no stored
+  choice follows their OS.
+
+### Default: follow the OS, no wiring
+
+An app that imports `styles.css` and puts **no** theme class on `<html>`
+already tracks the OS — light by default, dark under
+`prefers-color-scheme: dark`, switching live when the visitor flips their
+system appearance. `color-scheme` is set in the same rules, so native
+controls and scrollbars follow too. This is the expected setup. `hub` uses
+exactly this.
+
+### Optional: an in-app override
+
+Only if an app needs a manual Light / Dark / System control on top of the OS
+default:
+
+```tsx
+import { ThemeProvider, ThemeToggle } from '@cbassey/ui-kit'
+import { themeInitScript } from '@cbassey/ui-kit/theme-script'
+
+// Next.js — inline in the root <head> to stop the first-paint flash:
+<script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
+// Vite — paste the same string into a <script> in index.html's <head>.
+
+<ThemeProvider>{children}</ThemeProvider>   // defaultTheme "system",
+//                                             systemFallback "dark"
+<ThemeToggle />                             // in the header chrome
+```
+
+`useTheme()` returns `{ theme, resolvedTheme, setTheme }` (`theme` may be
+`"system"`; `resolvedTheme` is always `"light"` or `"dark"`).
+
+Do **not** hardcode a `dark` class on `<html>` any more, and do not add a
+`dark:` variant to hand-tune a component for one theme — every surface must
+be built from the semantic tokens (`bg-background`, `text-foreground`,
+`border-border`, `bg-card`, `text-muted-foreground`, …) so it tracks the
+theme for free. A raw `bg-black` / `text-white` / `bg-white` is a regression
+for the same reason a hue is.
 
 ## Three-typeface hierarchy
 

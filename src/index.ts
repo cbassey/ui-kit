@@ -27,6 +27,11 @@ export * from './components/shell/BusyButton'
 export * from './components/data-display/Meter'
 export * from './components/data-display/CategoryBreakdown'
 
+// theme
+export * from './components/theme/theme-provider'
+export * from './components/theme/theme-toggle'
+export { themeInitScript, THEME_STORAGE_KEY } from './theme-script'
+
 // lib
 export * from './lib/utils'
 export * from './lib/format'
