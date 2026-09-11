@@ -50,6 +50,12 @@ const preset: Omit<Config, 'content'> = {
         },
         signal: 'hsl(var(--signal))',
         warn: 'hsl(var(--warn))',
+        danger: {
+          DEFAULT: 'hsl(var(--danger))',
+          ink: 'hsl(var(--danger-ink))',
+          wash: 'hsl(var(--danger-wash))',
+          edge: 'hsl(var(--danger-edge))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

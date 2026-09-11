@@ -7,18 +7,37 @@ style preference.
 
 ## Zero-chroma grayscale
 
-State — pass/fail, active/inactive, selected/unselected, even destructive
-actions — is communicated through **value, opacity, and weight**, never hue.
-There is no red for "destructive"; it's still ink-on-paper, just as loud as
-"primary." If a component needs a new visual state, reach for a grayscale
-value or an opacity step before reaching for color.
+State — pass/fail, active/inactive, selected/unselected — is communicated
+through **value, opacity, and weight**, not hue. If a component needs a new
+visual state, reach for a grayscale value or an opacity step before reaching
+for color.
 
 Ink, borders, rings, and every foreground token are pure grayscale (HSL with
 0% saturation) in both themes. The single concession to warmth is the light
 **ground**: `--background` / `--card` / `--popover` carry a faint paper tone
 (hue 40, ~12–24% saturation, 97–99% lightness) so a light surface reads as
 paper, not a clinical white. Nothing painted *on* the ground picks up that
-hue. Dark mode stays fully zero-chroma.
+hue. Dark mode is zero-chroma apart from the danger tokens below.
+
+There is exactly one hue in the system, and it has exactly two jobs.
+
+## Danger, the one hue
+
+`--danger`, `--danger-ink`, `--danger-wash` and `--danger-edge` are red in both
+themes, lighter and less saturated in dark, because a mid red on a near-black
+ground reads as brown. They mean one of two things and nothing else:
+
+1. **Work that is overdue.** Always with the word beside it, never colour
+   alone — a reader who cannot tell the colours apart reads the word.
+2. **An action that destroys.** `<Button variant="destructive">` is the only
+   component that wears it.
+
+`--destructive` itself stays ink, and so does `<Alert variant="destructive">`.
+That is deliberate: everything else wearing the destructive name is an error
+message, and an error message is not a hazard. It says what went wrong; the
+red button says what is about to be destroyed.
+
+Spend the hue on a third thing and it stops meaning either of the first two.
 
 ## Light and dark
 

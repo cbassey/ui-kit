@@ -1,11 +1,14 @@
 /*
  * @cbassey/ui-kit design tokens — "Rams B&W" system, now dual-theme.
  *
- * State is still communicated through value, opacity, and weight, never hue
- * (destructive is ink-on-paper, not red). Ink, borders, and rings are pure
- * zero-chroma grayscale in both themes. The only concession to warmth is the
- * light ground: a faint paper tone (hue 40, low saturation) instead of a
- * clinical white. See DESIGN.md.
+ * State is communicated through value, opacity, and weight, not hue, with one
+ * deliberate exception: --danger and its three companions. Danger means work
+ * that is overdue, or an action that destroys. Nothing else may use it. Spend
+ * the hue on a third thing and it stops meaning either of the first two.
+ * Everything else -- ink, borders, rings -- stays pure zero-chroma grayscale
+ * in both themes. The only concession to warmth is the light ground: a faint
+ * paper tone (hue 40, low saturation) instead of a clinical white. See
+ * DESIGN.md.
  *
  * Theme resolution:
  *   :root                        -> light (the default)
@@ -49,6 +52,14 @@
     --signal: 0 0% 9%;
     --warn: 0 0% 38%;
 
+    /* Danger. The one hue in the system, and it is spent on two things:
+       work that is overdue, and an action that destroys. A hue used for a
+       third thing stops meaning either of the first two. */
+    --danger: 0 72% 44%;
+    --danger-ink: 0 0% 100%;
+    --danger-wash: 0 72% 96%;
+    --danger-edge: 0 60% 86%;
+
     /* Theme-independent. */
     --radius: 0.625rem;
     --page-max-width: 72rem; /* matches plop's max-w-6xl page column */
@@ -78,6 +89,10 @@
     --ring: 0 0% 100%;
     --signal: 0 0% 100%;
     --warn: 0 0% 58%;
+    --danger: 0 70% 58%;
+    --danger-ink: 0 0% 8%;
+    --danger-wash: 0 40% 14%;
+    --danger-edge: 0 34% 26%;
     color-scheme: dark;
   }
 
@@ -106,6 +121,10 @@
       --ring: 0 0% 100%;
       --signal: 0 0% 100%;
       --warn: 0 0% 58%;
+      --danger: 0 70% 58%;
+      --danger-ink: 0 0% 8%;
+      --danger-wash: 0 40% 14%;
+      --danger-edge: 0 34% 26%;
       color-scheme: dark;
     }
   }

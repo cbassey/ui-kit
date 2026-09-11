@@ -11,8 +11,12 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-foreground text-background shadow-none hover:bg-foreground/90",
+        // The one button that carries the hue. --destructive itself stays ink,
+        // because every other thing wearing it is an error message, and an
+        // error message is not a hazard: it says what went wrong, while this
+        // button says what is about to be destroyed.
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-danger text-danger-ink shadow-sm hover:bg-danger/90 focus-visible:ring-danger",
         outline:
           "border border-input bg-transparent shadow-none hover:bg-accent hover:text-accent-foreground",
         secondary:
