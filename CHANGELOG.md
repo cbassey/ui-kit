@@ -5,6 +5,29 @@ All notable changes to this project are documented here, following
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-09-11
+
+### Added
+- **Danger tokens.** `--danger`, `--danger-ink`, `--danger-wash` and
+  `--danger-edge`, in light and dark. They are the only hue in the system and
+  they mean two things: work that is overdue, and an action that destroys.
+  Dark is lighter and less saturated, because a mid red on a near-black ground
+  reads as brown. See DESIGN.md.
+- Seven parts: `Checkbox` (three states, including indeterminate), `Dialog`,
+  `Popover`, `Calendar` (the week starts on Monday, fixed here so a grouping
+  rule and a picker cannot disagree), `Command` (a searchable list),
+  `Tooltip`, and `Avatar` with `NameAvatar` and `initialsFromName`.
+
+### Changed
+- `<Button variant="destructive">` now carries the danger hue. `--destructive`
+  itself stays ink, and so does `<Alert variant="destructive">`: everything
+  else wearing that name is an error message, and an error message is not a
+  hazard.
+
+### Note for consumers
+- `NameAvatar` takes a name and never an email address, so an initial cut from
+  an address cannot reach another person's screen.
+
 ## [0.3.0] — 2026-09-01
 
 ### Added
