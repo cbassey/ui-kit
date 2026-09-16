@@ -9,8 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Reads the primary token, not the foreground, so an app can give its
+        // filled button a brand colour by setting --primary and
+        // --primary-foreground on its own :root. In this kit the two pairs are
+        // the same colours, so nothing changes unless an app asks for it.
         default:
-          "bg-foreground text-background shadow-none hover:bg-foreground/90",
+          "bg-primary text-primary-foreground shadow-none hover:bg-primary/90",
         // The one button that carries the hue. --destructive itself stays ink,
         // because every other thing wearing it is an error message, and an
         // error message is not a hazard: it says what went wrong, while this
