@@ -5,6 +5,16 @@ All notable changes to this project are documented here, following
 
 ## [Unreleased]
 
+## [0.4.1] — 2026-09-15
+
+### Changed
+- `<Button>` (the default variant) now reads `--primary` and
+  `--primary-foreground` instead of `--foreground` and `--background`. The kit
+  sets those pairs to the same colours, so no app changes on its own. An app
+  that overrides `--primary` on its `:root` now gets a brand-coloured filled
+  button, which is what the shadcn tokens were for. Gael is the first to do
+  so.
+
 ## [0.4.0] — 2026-09-11
 
 ### Added
