@@ -5,6 +5,15 @@ All notable changes to this project are documented here, following
 
 ## [Unreleased]
 
+## [0.4.2] — 2026-10-06
+
+### Fixed
+- The default focus ring on buttons and fields no longer outranks the
+  element's own classes. It was written as `textarea:focus-visible`, which
+  beats `outline-none`, so a field that shows focus through its own box got
+  a second, square ring inside it. The rule now sits in `:where()` and any
+  class on the element replaces it.
+
 ## [0.4.1] — 2026-09-15
 
 ### Changed
