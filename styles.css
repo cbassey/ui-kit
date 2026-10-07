@@ -142,10 +142,10 @@
     background: hsl(var(--foreground) / 0.16);
   }
 
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible {
+  /* The default ring for anything focusable. :where() gives it no weight,
+     so any class on the element (outline-none, a ring utility) replaces it
+     instead of stacking a second ring on top. */
+  :where(button, input, textarea, select):where(:focus-visible) {
     outline: 2px solid hsl(var(--ring) / 0.35);
     outline-offset: 2px;
   }
